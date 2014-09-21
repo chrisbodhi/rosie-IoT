@@ -19,6 +19,6 @@ angular.module('rosieApp')
     $scope.addFood = function () {
       $scope.meals.push({name: $scope.foodThing});
       $scope.foodThing = '';
-    }
+    };
 
   });

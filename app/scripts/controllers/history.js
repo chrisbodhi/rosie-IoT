@@ -48,7 +48,7 @@ angular.module('rosieApp')
         //   axis: 'y'
         // }
       ],
-      axes: {x: {type: 'linear', key: 'x', labelFunction: function(data) {console.log(data);}}, y: {type: 'linear'}},
+      axes: {x: {type: 'linear', key: 'x', labelFunction: function(x) {console.log(x);}}, y: {type: 'linear'}},
       tension: 0.7,
       tooltip: {mode: 'scrubber'},
       drawLegend: true,
