@@ -3,11 +3,9 @@ var Schema      = mongoose.Schema;
 
 var MealSchema  = new Schema({
   name: String,
-  meal: {
-    weight: Number,
-    picture: String,
-    time: Date
-  },
+  mealWeight: String,
+  picture: String,
+  taken: { type: Date, default: Date.now}
 });
 
 module.exports = mongoose.model('Meal', MealSchema);

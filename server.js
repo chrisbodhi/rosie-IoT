@@ -55,14 +55,16 @@ router.route('/meals')
     
     var meal = new Meal();    // create a new instance of the Meal model
     meal.name = req.body.name;  // set the meals name (comes from the request)
-    meal.meal = req.body.meal;
+    meal.mealWeight = req.body.mealWeight;
+    meal.picture = req.body.picture;
+    meal.taken = req.body.taken;
 
     // save the meal and check for errors
     meal.save(function(err) {
       if (err)
         res.send(err);
 
-      res.json({ message: 'Meal created!' });
+      res.json({ message: 'Meal created!', pic: 'meal.picture' });
     });
     
   })
