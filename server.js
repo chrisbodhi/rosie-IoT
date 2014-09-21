@@ -11,6 +11,8 @@ var mongoose   = require('mongoose');
 var dotenv     = require('dotenv');
 var Schema     = mongoose.Schema;
 var multer     = require('multer');
+var Meal       = require('./app/models/meals');
+
 
 // Prepare the .env environmental variables for local dev
 dotenv.load();
@@ -54,7 +56,6 @@ router.get('/', function(req, res) {
 });
 
 // more routes for our API will happen here
-
 router.route('/meals')
 
   // create a meal (accessed at POST http://localhost:8989/api/meals)
@@ -88,8 +89,9 @@ router.route('/meals')
 
 
 // REGISTER OUR ROUTES -------------------------------
-app.get('/', function(req, res){
-  res.send('index');
+router.get('/', function (req, res, next) {
+  // render a regular page
+  res.render('app/index');
 });
 
 // all of our routes will be prefixed with /api
