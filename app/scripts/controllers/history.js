@@ -38,34 +38,33 @@ angular.module('rosieApp')
           color: '#d62728',
           axis: 'y'
         }
+        // },
+        // {
+        //   id: 'weight',
+        //   y: 'weight',
+        //   label: 'Weight',
+        //   type: 'column',
+        //   color: '#4CBB17',
+        //   axis: 'y'
+        // }
       ],
-      axes: {x: {type: 'linear', key: 'x'}, y: {type: 'linear'}},
+      axes: {x: {type: 'linear', key: 'x', labelFunction: function(data) {console.log(data);}}, y: {type: 'linear'}},
       tension: 0.7,
       tooltip: {mode: 'scrubber'},
       drawLegend: true,
       drawDots: true,
       columnsHGap: 5
     };
-
-    $scope.data = [
-      {
-        x: 0,
-        fat: 0,
-        protein: 0,
-        carbs: 0,
-        weight: 0
-      }]
-
     
     $scope.data = [
       { 
-        x: 0, 
+        x: 1, 
         weight: 100, 
         fat: 9, 
         protein: 21, 
-        carbs: 0
+        carbs: 0,
         // calories: 172, 
-        // name: 'Chicken Breast'
+        name: 'Chicken Breast'
       },
 
       { 
@@ -73,36 +72,36 @@ angular.module('rosieApp')
         weight: 148, 
         fat: 0.6, 
         protein: 4.2,
-        carbs: 10
+        carbs: 10,
         // calories: 50, 
-        // name: 'Broccoli'
+        name: 'Broccoli'
       },
       { 
         x: 3, 
         weight: 242, 
         fat: 7, 
         protein: 4,
-        carbs: 35
+        carbs: 35,
         // calories: 214, 
-        // name: 'Mashed Potatoes'
+        name: 'Mashed Potatoes'
       },
       { 
         x: 4, 
         weight: 238, 
         fat: 14, 
         protein: 4.6,
-        carbs: 13
+        carbs: 13,
         // calories: 188, 
-        // name: 'Gravy, Chicken'
+        name: 'Gravy, Chicken'
       },
       { 
         x: 5, 
         weight: 66, 
         fat: 7, 
         protein: 2.3,
-        carbs: 16
+        carbs: 16,
         // calories: 137, 
-        // name: 'Vanilla Ice Cream
+        name: 'Vanilla Ice Cream'
       }
     ];
 

@@ -17,6 +17,11 @@ angular
     'ngSanitize',
     'ngTouch'
   ])
+  .controller('IndexCtrl', function ($scope){
+      $scope.toggleActive = function(){
+        
+      };
+  })
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
