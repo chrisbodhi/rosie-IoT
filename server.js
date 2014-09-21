@@ -9,6 +9,9 @@ var app        = express();         // define our app using express
 var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
 var dotenv     = require('dotenv');
+var Schema      = mongoose.Schema;
+var multer     = require('multer');
+var Pictoose   = require('pictoose');
 
 // Prepare the .env environmental variables for local dev
 dotenv.load();
@@ -19,12 +22,33 @@ var MONGOLAB_URI = process.env.MONGOLAB_URI;
 // MONGOLAB_URI is defined in .env and in `heroku config`
 mongoose.connect(MONGOLAB_URI);
 
-var Meal       = require('./app/models/meals');
+var MealSchema = new Schema({
+  name: String,
+  weight: String,
+  taken: { type: Date, default: Date.now} // this does *not* save the datetime at time of object creation; it is the current time
+});
+
+MealSchema.plugin(Pictoose.Plugin, ['thumbnail','brand']);
+
+var Meal = mongoose.model('Meal', MealSchema);
+
+
+Pictoose.Config('RESOURCE_STORAGE_ROOT', './public/');
+Pictoose.Config('RESOURCE_STORAGE_URL', 'http://pacific-shelf-3302.herokuapp.com/public/');
+Pictoose.Config('RESOURCE_MAIN_URL', 'http://pacific-shelf-3302.herokuapp.com/');
+// http://pacific-shelf-3302.herokuapp.com
+
+app.use('/public', express.static('./public'));
+app.get('/resources/:resid', Pictoose.RouteController);
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(multer({
+  dest: './uploads/'
+}));
 
 var port = process.env.PORT || 8989;    // set our port
 
@@ -56,7 +80,8 @@ router.route('/meals')
     var meal = new Meal();    // create a new instance of the Meal model
     meal.name = req.body.name;  // set the meals name (comes from the request)
     meal.weight = req.body.weight;
-    meal.picture = req.body.picture;
+    console.log(req.files.brand.path);
+    meal.brand = req.files.brand.path;
     meal.taken = req.body.taken;
 
     // save the meal and check for errors
