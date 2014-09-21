@@ -10,6 +10,7 @@
  */
 angular
   .module('rosieApp', [
+    'n3-line-chart',
     'ngAnimate',
     'ngResource',
     'ngRoute',
