@@ -10,13 +10,13 @@ var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
 var dotenv     = require('dotenv');
 
-// Prepare the process.env environmental variables for local dev
+// Prepare the .env environmental variables for local dev
 dotenv.load();
 
 var MONGOLAB_URI = process.env.MONGOLAB_URI;
 
 // connect to DB, hosted on Heroku
-// MONGOLAB_URI is defined in webside/process.env and in `heroku config`
+// MONGOLAB_URI is defined in .env and in `heroku config`
 mongoose.connect(MONGOLAB_URI);
 
 var Meal       = require('./app/models/meals');
