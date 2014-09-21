@@ -3,7 +3,7 @@ var Schema      = mongoose.Schema;
 
 var MealSchema  = new Schema({
   name: String,
-  mealWeight: String,
+  weight: String,
   picture: String,
   taken: { type: Date, default: Date.now}
 });

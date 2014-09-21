@@ -55,7 +55,7 @@ router.route('/meals')
     
     var meal = new Meal();    // create a new instance of the Meal model
     meal.name = req.body.name;  // set the meals name (comes from the request)
-    meal.mealWeight = req.body.mealWeight;
+    meal.weight = req.body.weight;
     meal.picture = req.body.picture;
     meal.taken = req.body.taken;
 
