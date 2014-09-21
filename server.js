@@ -11,7 +11,6 @@ var mongoose   = require('mongoose');
 var dotenv     = require('dotenv');
 var Schema      = mongoose.Schema;
 var multer     = require('multer');
-// var Pictoose   = require('pictoose');
 
 // Prepare the .env environmental variables for local dev
 dotenv.load();
@@ -22,24 +21,8 @@ var MONGOLAB_URI = process.env.MONGOLAB_URI;
 // MONGOLAB_URI is defined in .env and in `heroku config`
 mongoose.connect(MONGOLAB_URI);
 
-var MealSchema = new Schema({
-  name: String,
-  weight: String,
-  taken: { type: Date, default: Date.now} // this does *not* save the datetime at time of object creation; it is the current time
-});
-
-// MealSchema.plugin(Pictoose.Plugin, ['thumbnail','brand']);
-
-var Meal = mongoose.model('Meal', MealSchema);
-
-
-// Pictoose.Config('RESOURCE_STORAGE_ROOT', './public/');
-// Pictoose.Config('RESOURCE_STORAGE_URL', 'http://pacific-shelf-3302.herokuapp.com/public/');
-// Pictoose.Config('RESOURCE_MAIN_URL', 'http://pacific-shelf-3302.herokuapp.com/');
-// http://pacific-shelf-3302.herokuapp.com
 
 app.use('/public', express.static('./public'));
-// app.get('/resources/:resid', Pictoose.RouteController);
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
