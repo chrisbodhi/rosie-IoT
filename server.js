@@ -9,7 +9,7 @@ var app        = express();         // define our app using express
 var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
 var dotenv     = require('dotenv');
-var Schema      = mongoose.Schema;
+var Schema     = mongoose.Schema;
 var multer     = require('multer');
 
 // Prepare the .env environmental variables for local dev
@@ -63,8 +63,7 @@ router.route('/meals')
     var meal = new Meal();    // create a new instance of the Meal model
     meal.name = req.body.name;  // set the meals name (comes from the request)
     meal.weight = req.body.weight;
-    console.log(req.files.brand.path);
-    meal.brand = req.files.brand.path;
+    meal.image = req.body.image;
     meal.taken = req.body.taken;
 
     // save the meal and check for errors
@@ -89,6 +88,10 @@ router.route('/meals')
 
 
 // REGISTER OUR ROUTES -------------------------------
+app.get('/', function(req, res){
+  res.send('index');
+});
+
 // all of our routes will be prefixed with /api
 app.use('/api', router);
 
