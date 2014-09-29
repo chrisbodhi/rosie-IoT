@@ -12,7 +12,7 @@ var dotenv     = require('dotenv');
 var Schema     = mongoose.Schema;
 var multer     = require('multer');
 var Meal       = require('./app/models/meals');
-
+var routes     = require('./routes');
 
 // Prepare the .env environmental variables for local dev
 dotenv.load();
@@ -23,8 +23,6 @@ var MONGOLAB_URI = process.env.MONGOLAB_URI;
 // MONGOLAB_URI is defined in .env and in `heroku config`
 mongoose.connect(MONGOLAB_URI);
 
-
-app.use('/public', express.static('./public'));
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -89,10 +87,25 @@ router.route('/meals')
 
 
 // REGISTER OUR ROUTES -------------------------------
-router.get('/', function (req, res, next) {
-  // render a regular page
-  res.render('app/index');
+
+// app.configure(function(){
+//   app.set('app', __dirname + '/app');
+//   app.set('view engine', 'html');
+//   app.use(express.bodyParser());
+//   app.use(express.methodOverride());
+//   app.use(express.static(__dirname + '/public'));
+//   app.use(app.router);
+// });
+
+app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/app'));
+// app.use(express.static(__dirname + '/app/styles'));
+app.get('/', function(req, res){
+  res.sendFile('app/index.html');
 });
+// app.get('*', function(req, res){
+//   res.sendFile('app/index.html');
+// });
 
 // all of our routes will be prefixed with /api
 app.use('/api', router);
